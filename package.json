@@ -1,0 +1,48 @@
+{
+  "name": "@pharosone/dialogs",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the PharosOne dialogs API: upsert agents, stream messages per turn, send dialog snapshots.",
+  "license": "MIT",
+  "homepage": "https://app.pharosone.ai/docs/sdks",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pharosone/dialogs-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pharosone/dialogs-ts/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pharosone",
+    "dialogs",
+    "sdk",
+    "agents",
+    "observability"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}
