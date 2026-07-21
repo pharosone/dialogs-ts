@@ -18,7 +18,35 @@ snapshots.
 npm install @pharosone/dialogs
 ```
 
-## Quickstart
+## Quickstart — instrument an existing client (zero-touch)
+
+Already using the OpenAI or Anthropic SDK? Wrap the client once and every
+completed chat call is mirrored to PharosOne — no manual send calls, the
+provider response is returned unchanged:
+
+```ts
+import OpenAI from "openai";
+import { PharosOne, wrapOpenAI, withPharosSession } from "@pharosone/dialogs";
+
+const pharos = new PharosOne({ baseUrl: "https://pharos.example.com" });
+const openai = wrapOpenAI(new OpenAI(), { pharos, agentId: "support-bot" });
+
+await withPharosSession("session-42", async () => {
+  await openai.chat.completions.create({   // your call, unchanged — now mirrored
+    model: "gpt-5.5",
+    messages: [{ role: "user", content: "Where is my order?" }],
+  });
+});
+```
+
+`wrapAnthropic` does the same for Anthropic, and any OpenAI-compatible endpoint
+(Ollama, vLLM, OpenRouter, Azure) works through `wrapOpenAI`. Full details —
+streaming, session binding, tool calls, `onResult` — are in
+[Instrument an existing client](#instrument-an-existing-client) below.
+
+## Send messages manually
+
+No provider client to wrap (or you want full control)? Post each turn yourself:
 
 ```ts
 import { PharosOne } from "@pharosone/dialogs";
@@ -72,7 +100,7 @@ const openai = wrapOpenAI(new OpenAI(), { pharos, agentId: "support-bot" });
 
 // Use it exactly as before — the response (or stream) is passed through unchanged.
 const completion = await openai.chat.completions.create({
-  model: "gpt-4o-mini",
+  model: "gpt-5.5",
   messages: [{ role: "user", content: "Where is my order A-1001?" }],
 });
 ```

@@ -1,6 +1,6 @@
 {
   "name": "@pharosone/dialogs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript SDK for the PharosOne dialogs API: upsert agents, stream messages per turn, send dialog snapshots.",
   "license": "MIT",
   "homepage": "https://app.pharosone.ai/docs/sdks",
